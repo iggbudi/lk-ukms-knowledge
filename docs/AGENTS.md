@@ -45,3 +45,16 @@
 - Dependency install/update: `rtk composer install`
 - WhatsApp test: `rtk php test_wa.php`
 - Project utility scripts: `rtk php scripts/check_alur.php`, `rtk php scripts/check_detail.php`
+
+## Documentation
+
+Project documentation files:
+
+| File | Purpose |
+|------|---------|
+| `README.md` | Main documentation - installation, features, structure |
+| `CHANGELOG.md` | Change log - what was added/fixed per date |
+| `arsitektur.md` | Architecture documentation - diagrams, data models, system design |
+| `teknis.md` | Technical guide - setup, development, troubleshooting |
+| `CLAUDE.md` | Primary architecture reference for code changes |
+| `AGENTS.md` | This file - instructions for AI agents |
