@@ -1,11 +1,11 @@
 #!/bin/bash
 # sync-knowledge.sh — Auto-sync knowledge hub from LK UKMs project
 # Usage: ./scripts/sync-knowledge.sh
-# Cron: 0 */6 * * * /root/lk-ukms-knowledge/scripts/sync-knowledge.sh >> /var/log/knowledge-sync.log 2>&1
+# Cron: 0 */6 * * * /root/dbs-second-brain/scripts/sync-knowledge.sh >> /var/log/knowledge-sync.log 2>&1
 
 set -euo pipefail
 
-KNOWLEDGE_REPO="${KNOWLEDGE_REPO:-$HOME/lk-ukms-knowledge}"
+KNOWLEDGE_REPO="${KNOWLEDGE_REPO:-$HOME/dbs-second-brain}"
 PROJECT_DIR="${PROJECT_DIR:-/var/www/lk.pjdigital.top}"
 LOG_FILE="/var/log/knowledge-sync.log"
 

@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "exported_at": "2026-06-25 15:32:27",
+  "exported_at": "2026-06-25 15:37:51",
   "sessions": [
     {
       "id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
@@ -611,6 +611,22 @@
       "last_seen_at": "2026-06-25 15:27:38",
       "created_at": "2026-06-25 15:27:38",
       "updated_at": "2026-06-25 15:27:38"
+    },
+    {
+      "id": 31,
+      "sync_id": "obs-8d4cca787abd70c4",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "type": "pattern",
+      "title": "Pi harus cek Engram di awal sesi",
+      "content": "**What**: Setiap sesi baru Pi dimulai, WAJIB panggil `mem_context` atau `mem_search` dulu sebelum merespon user\n\n**Why**: DBS kecewa karena Pi lupa informasi yang sudah disimpan di Engram. Engram bekerja, tapi Pi tidak proaktif mencari memory.\n\n**Where**: Semua sesi Pi, di semua server\n\n**Learned**:\n1. Jangan assume \"baru mulai\" berarti \"tidak tahu apa-apa\"\n2. Selalu cek Engram dulu di awal sesi\n3. DBS punya memory tersimpan: identitas, preferensi, pipeline knowledge hub\n4. Repo Otak Kedua: https://github.com/iggbudi/dbs-second-brain\n\n**Rules**:\n- Awal sesi → `mem_context(project=current)` dulu\n- Kalau user tanya sesuatu yang pernah dibahas → `mem_search` dulu\n- Jangan bilang \"tidak tahu\" sebelum cek memory",
+      "project": "lk-ukms",
+      "scope": "personal",
+      "topic_key": "session-startup-routine",
+      "revision_count": 1,
+      "duplicate_count": 1,
+      "last_seen_at": "2026-06-25 15:36:41",
+      "created_at": "2026-06-25 15:36:41",
+      "updated_at": "2026-06-25 15:36:41"
     }
   ],
   "prompts": [
@@ -1157,6 +1173,54 @@
       "content": "Error: Knowledge sync: push failed",
       "project": "lk-ukms",
       "created_at": "2026-06-25 15:31:36"
+    },
+    {
+      "id": 69,
+      "sync_id": "prompt-73b19833d71af659",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "content": "Error: Knowledge sync: push failed",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 15:32:47"
+    },
+    {
+      "id": 70,
+      "sync_id": "prompt-23324fa53c7af651",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "content": "itu tadi error waktu aku jalankan /sync-knowledge",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 15:33:14"
+    },
+    {
+      "id": 71,
+      "sync_id": "prompt-a6f79e86a3d6ab87",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "content": "cek engram, berarti nanti tidak bisa sinkron entar engram dan repo github otak kedua?",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 15:34:51"
+    },
+    {
+      "id": 72,
+      "sync_id": "prompt-cfe6484ed83913f9",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "content": "coba tuliskan repo url github otak kedua",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 15:35:31"
+    },
+    {
+      "id": 73,
+      "sync_id": "prompt-a95c769877dfd4e6",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "content": "kamu beneran sudah lupa begitu ganti sesi, sepertinya engram tidak bekerja atau ada yang salah, repo yang benar untuk otak kedua adalah https://github.com/iggbudi/dbs-second-brain/tree/main",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 15:36:23"
+    },
+    {
+      "id": 74,
+      "sync_id": "prompt-5b822aae13771c31",
+      "session_id": "019eff66-9629-7c95-b8a3-d450ae20923d",
+      "content": "apakah belum di setup?",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 15:37:03"
     }
   ]
 }
