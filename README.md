@@ -29,7 +29,8 @@ Jika kamu adalah Pi yang baru pertama kali melihat repo ini, **selamat datang!**
 
 | Folder | Isi |
 |--------|-----|
-| `memories/` | Engram knowledge chunks (observations, decisions, preferences) |
+| `memories/` | Curated memory exports and Markdown summaries |
+| `.engram/` | Engram sync chunks/manifest for import across servers |
 | `docs/` | Dokumentasi project |
 | `wiki/` | Knowledge wiki |
 | `agents/` | Custom agent definitions |
@@ -84,7 +85,7 @@ mkdir -p .engram
 cat > .engram/config.json << 'EOF'
 {
   "project_name": "your-project-name",
-  "github_repo": "lk-ukms-knowledge"
+  "github_repo": "dbs-second-brain"
 }
 EOF
 ```
@@ -94,10 +95,10 @@ EOF
 ```bash
 # Copy chunk files dari repo ke project
 mkdir -p /var/www/your-project-name/.engram/chunks
-cp ~/lk-ukms-knowledge/memories/.engram/chunks/* /var/www/your-project-name/.engram/chunks/
+cp ~/dbs-second-brain/.engram/chunks/* /var/www/your-project-name/.engram/chunks/
 
 # Copy manifest
-cp ~/lk-ukms-knowledge/memories/.engram/manifest.json /var/www/your-project-name/.engram/
+cp ~/dbs-second-brain/.engram/manifest.json /var/www/your-project-name/.engram/
 
 # Verifikasi
 ls -la /var/www/your-project-name/.engram/chunks/
@@ -113,10 +114,10 @@ Extension ini akan otomatis sync knowledge ke GitHub saat Pi session berakhir.
 mkdir -p ~/.pi/extensions
 
 # Copy extension dari repo
-cp ~/lk-ukms-knowledge/scripts/knowledge-sync.ts ~/.pi/extensions/
+cp ~/dbs-second-brain/scripts/knowledge-sync.ts ~/.pi/extensions/
 
 # Atau buat symlink (lebih baik, karena auto-update)
-ln -sf ~/lk-ukms-knowledge/scripts/knowledge-sync.ts ~/.pi/extensions/knowledge-sync.ts
+ln -sf ~/dbs-second-brain/scripts/knowledge-sync.ts ~/.pi/extensions/knowledge-sync.ts
 
 # Verifikasi
 ls -la ~/.pi/extensions/
@@ -131,7 +132,7 @@ Cron job ini akan sync knowledge setiap 6 jam sebagai backup.
 crontab -e
 
 # Tambahkan baris berikut:
-0 */6 * * * ~/lk-ukms-knowledge/scripts/sync-knowledge.sh >> /var/log/knowledge-sync.log 2>&1
+0 */6 * * * ~/dbs-second-brain/scripts/sync-knowledge.sh >> /var/log/knowledge-sync.log 2>&1
 
 # Simpan dan keluar
 ```
@@ -202,7 +203,7 @@ pi
 Extension `knowledge-sync.ts` otomatis melakukan:
 
 1. **Export Engram** → Semua knowledge di-export ke chunks
-2. **Copy ke repo** → Chunks di-copy ke `~/lk-ukms-knowledge/memories/`
+2. **Copy ke repo** → Chunks di-copy ke `~/dbs-second-brain/.engram/`
 3. **Git add** → Stage semua perubahan
 4. **Git commit** → Commit dengan message: `auto-sync: Pi session {reason} ({timestamp})`
 5. **Git push** → Push ke GitHub
@@ -339,7 +340,7 @@ engram search "test"
 ### Git auth gagal
 
 ```bash
-cd ~/lk-ukms-knowledge
+cd ~/dbs-second-brain
 git remote -v
 
 # Pastikan credentials tersimpan
@@ -350,7 +351,7 @@ git pull
 ### Push conflict
 
 ```bash
-cd ~/lk-ukms-knowledge
+cd ~/dbs-second-brain
 git pull --rebase
 # Resolve conflict jika ada
 git push
@@ -366,7 +367,7 @@ ls -la ~/.pi/extensions/
 tail -f /var/log/knowledge-sync.log
 
 # Test manual sync
-~/lk-ukms-knowledge/scripts/sync-knowledge.sh
+~/dbs-second-brain/scripts/sync-knowledge.sh
 ```
 
 ---
@@ -430,7 +431,7 @@ Extension akan otomatis:
 Gunakan checklist ini untuk memastikan setup lengkap:
 
 - [ ] Engram terinstall (`which engram`)
-- [ ] Knowledge repo cloned (`~/lk-ukms-knowledge`)
+- [ ] Knowledge repo cloned (`~/dbs-second-brain`)
 - [ ] Engram config dibuat (`.engram/config.json`)
 - [ ] Knowledge di-import dari GitHub
 - [ ] Pi extension di-copy/symlink

@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "exported_at": "2026-06-25 15:37:51",
+  "exported_at": "2026-06-25 16:29:19",
   "sessions": [
     {
       "id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
@@ -127,6 +127,12 @@
       "project": "lk-ukms",
       "directory": "/var/www/lk.pjdigital.top",
       "started_at": "2026-06-25 15:30:02"
+    },
+    {
+      "id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "project": "lk-ukms",
+      "directory": "/var/www/lk.pjdigital.top",
+      "started_at": "2026-06-25 16:21:16"
     }
   ],
   "observations": [
@@ -419,32 +425,32 @@
       "sync_id": "obs-d8330108e122f36d",
       "session_id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
       "type": "config",
-      "title": "Knowledge Hub Pipeline - Pi + Engram + GitHub Setup",
-      "content": "**What**: Full pipeline Pi → Engram → GitHub knowledge hub implemented and operational.\n\n**Why**: Consolidate all coding agent knowledge (docs, wiki, memories, agents, rules) into one GitHub repo for cross-machine access and version control.\n\n**Where**: \n- GitHub repo: https://github.com/iggbudi/lk-ukms-knowledge.git\n- Local clone: ~/lk-ukms-knowledge/\n- Pi extension: ~/.pi/extensions/knowledge-sync.ts\n- Sync script: ~/lk-ukms-knowledge/scripts/sync-knowledge.sh\n- Engram config: /var/www/lk.pjdigital.top/.engram/config.json (project_name: lk-ukms)\n\n**Pipeline**:\n1. Pi session starts → extension loaded automatically\n2. During session → LLM calls mem_save/mem_update via Engram MCP → saves to SQLite\n3. Session ends (Ctrl+C, /quit, /new) → extension fires session_shutdown hook\n4. Extension runs: engram sync --all → export JSON → copy docs/wiki/agents/rules → git commit → push\n5. On other machine → git pull → engram sync --import → knowledge available\n\n**Repo Structure**:\n- docs/ (15 files): CLAUDE.md, panduanagen.md, arsitektur.md, analisis.md, AGENTS.md, task lists, dll\n- wiki/ (12 files): 00-overview through 99-known-issues\n- agents/ (5 files): lk-analyst, lk-developer, lk-qa, lk-designer, lk-docs\n- rules/ (4 files): agent-routing, development, qa, security\n- memories/: engram-export.json + .engram/chunks/\n- scripts/: sync-knowledge.sh\n\n**Automation**:\n- Pi extension: Auto-sync on session_shutdown, manual via /sync-knowledge command\n- Cron: Every 6 hours (0 */6 * * *)\n- Log: /var/log/knowledge-sync.log\n\n**Git Auth**: HTTPS with cached credentials (server already has access).\n\n**Stats**: 40 files, 8743+ lines, 11 sessions, 18 observations, 27 prompts exported.",
+      "title": "Knowledge Hub Pipeline - dbs-second-brain setup",
+      "content": "**What**: Pipeline Pi → Engram → GitHub knowledge hub uses canonical repo `dbs-second-brain`.\n\n**Why**: Consolidate coding-agent knowledge, docs, wiki, memories, agents, and rules into one GitHub repo for cross-server access and version control.\n\n**Where**: GitHub repo `https://github.com/iggbudi/dbs-second-brain`; local clone `~/dbs-second-brain`; sync script `~/dbs-second-brain/scripts/sync-knowledge.sh`; Engram config `/var/www/lk.pjdigital.top/.engram/config.json`.\n\n**Learned**: The old repo/name `lk-ukms-knowledge` is obsolete. Current structure: `memories/engram-export.json` for JSON dump, root `.engram/chunks/` for Engram sync chunks, `docs/`, `wiki/`, `agents/`, `rules/`, and `scripts/`. Flow: Pi saves observations to Engram; `engram sync --all` exports chunks; `engram export` updates JSON; repo commit/push makes knowledge available to other servers; other servers pull and run `engram sync --import`.",
       "project": "simapro",
       "scope": "project",
       "topic_key": "knowledge-hub-pipeline",
-      "revision_count": 1,
+      "revision_count": 2,
       "duplicate_count": 1,
       "last_seen_at": "2026-06-25 14:00:46",
       "created_at": "2026-06-25 14:00:46",
-      "updated_at": "2026-06-25 14:00:46"
+      "updated_at": "2026-06-25 16:29:07"
     },
     {
       "id": 20,
       "sync_id": "obs-c660e7bedb36776d",
       "session_id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
       "type": "discovery",
-      "title": "Knowledge Hub Pipeline - Test Results",
-      "content": "**What**: Full pipeline Pi + Engram + GitHub tested and verified working.\n\n**Where**: \n- GitHub: https://github.com/iggbudi/lk-ukms-knowledge\n- Extension: ~/.pi/agent/extensions/knowledge-sync.ts\n\n**Tests Passed**:\n1. ✅ Engram sync --all (creates chunks in .engram/)\n2. ✅ Engram export (JSON dump to memories/)\n3. ✅ Pi extension loading (--extension flag)\n4. ✅ session_shutdown hook fires on Pi exit\n5. ✅ Auto-sync: engram sync → copy docs → git commit → push\n6. ✅ /sync-knowledge command works\n7. ✅ Cron job active (every 6 hours)\n8. ✅ Git log shows 4 commits (1 manual + 3 auto-synced)\n\n**Git Log**:\n- 46e2fed: Initial commit (40 files)\n- 28bf38b: First cron auto-sync\n- b0ae931: Pi extension auto-sync (session quit)\n- fde0001: Pi extension auto-sync (manual command)\n\n**Stats**: 45 files synced, 11 sessions, 19 observations, 28 prompts.\n\n**Extension Behavior**:\n- Fires on session_shutdown (quit, /new, /resume, /fork)\n- Shows notification: \"Knowledge synced to GitHub (X files changed)\"\n- Commit message format: \"auto-sync: Pi session {reason} ({timestamp})\"\n- Push retry: 3 attempts with 3s delay",
+      "title": "Knowledge Hub Pipeline - dbs-second-brain test results",
+      "content": "**What**: Pi + Engram + GitHub knowledge pipeline was tested and should now target `dbs-second-brain`.\n\n**Why**: DBS needs reliable cross-server memory sync so Engram and GitHub complement each other.\n\n**Where**: GitHub `https://github.com/iggbudi/dbs-second-brain`; sync chunks in root `.engram/`; JSON dump in `memories/engram-export.json`.\n\n**Learned**: Valid tests are: `engram sync --all` creates chunks in `.engram/`; `engram export` writes JSON dump to `memories/`; sync script can stage/commit/push repo changes; other machines should pull then run `engram sync --import`. Historical references to `lk-ukms-knowledge` are obsolete and should be replaced with `dbs-second-brain` in docs and setup instructions.",
       "project": "simapro",
       "scope": "project",
-      "topic_key": "knowledge-hub-test",
-      "revision_count": 1,
+      "topic_key": "knowledge-hub-pipeline-tests",
+      "revision_count": 2,
       "duplicate_count": 1,
       "last_seen_at": "2026-06-25 14:04:07",
       "created_at": "2026-06-25 14:04:07",
-      "updated_at": "2026-06-25 14:04:07"
+      "updated_at": "2026-06-25 16:29:13"
     },
     {
       "id": 21,
@@ -535,49 +541,49 @@
       "sync_id": "obs-8862446061c755f0",
       "session_id": "019eff19-63e1-7755-ba88-91b719e86e14",
       "type": "config",
-      "title": "Instruksi setup Pi di server lain - Knowledge Hub",
-      "content": "**What**: Panduan lengkap untuk menghubungkan Pi di server baru ke Central Knowledge Hub\n\n**Why**: Agar Pi di server manapun bisa push knowledge ke GitHub yang sama, sehingga terbentuk \"second brain\" lengkap\n\n**Prerequisites**:\n- GitHub repo: https://github.com/iggbudi/lk-ukms-knowledge\n- Server utama sudah punya Engram + Pi extension yang auto-sync\n\n---\n\n## ALUR KERJA YANG BENAR\n\n```\nServer A ────push────► GitHub (lk-ukms-knowledge) ◄────push──── Server B\n                              │\n                              ▼\n                     Knowledge tergabung\n                     dari semua server\n```\n\n**Setiap server PUSH ke GitHub yang sama**, bukan server utama yang pull.\n\n---\n\n## LANGKAH SETUP DI SERVER BARU\n\n### Step 1: Clone Knowledge Repo\n```bash\ncd ~\ngit clone https://github.com/iggbudi/lk-ukms-knowledge.git\ncd lk-ukms-knowledge\n```\n\n### Step 2: Install Engram\n```bash\n# Cek apakah sudah terinstall\nwhich engram\n\n# Install jika belum\nnpm install -g @earendil-works/engram\n```\n\n### Step 3: Setup Engram untuk Project\n```bash\n# Masuk ke project kamu\ncd /var/www/your-project\n\n# Buat direktori Engram\nmkdir -p .engram\n\n# Buat config file\ncat \u003e .engram/config.json \u003c\u003c 'EOF'\n{\n  \"project_name\": \"your-project-name\",\n  \"github_repo\": \"lk-ukms-knowledge\"\n}\nEOF\n```\n\n### Step 4: Setup Pi Extension (Auto-Sync)\n```bash\n# Copy extension dari repo\nmkdir -p ~/.pi/extensions\ncp ~/lk-ukms-knowledge/scripts/knowledge-sync.ts ~/.pi/extensions/\n\n# Atau buat symlink\nln -sf ~/lk-ukms-knowledge/scripts/knowledge-sync.ts ~/.pi/extensions/knowledge-sync.ts\n```\n\n### Step 5: Setup Git Auth\n```bash\n# Pastikan bisa push ke GitHub\ncd ~/lk-ukms-knowledge\ngit config user.email \"your-email@example.com\"\ngit config user.name \"Your Name\"\n\n# Test pull \u0026 push\ngit pull\ngit push\n```\n\n### Step 6: Setup Cron Job (Auto-Sync Periodik)\n```bash\ncrontab -e\n# Tambahkan baris berikut (sync setiap 6 jam):\n0 */6 * * * ~/lk-ukms-knowledge/scripts/sync-knowledge.sh \u003e\u003e /var/log/knowledge-sync.log 2\u003e\u00261\n```\n\n### Step 7: Pakai Pi Seperti Biasa\n```bash\ncd /var/www/your-project\npi\n\n# Mulai kerja, bikin project, save ke Engram\n# Extension akan otomatis sync saat session berakhir\n```\n\n---\n\n## YANG TERJADI SAAT SESSION BERAKHIR\n\nExtension otomatis melakukan:\n1. `engram sync --all` → Export semua knowledge ke chunks\n2. Copy chunks ke `~/lk-ukms-knowledge/memories/`\n3. `git add .` → Stage perubahan\n4. `git commit -m \"auto-sync: Pi session {reason} ({timestamp})\"`\n5. `git push` → Push ke GitHub\n\n---\n\n## HASILNYA SETELAH BEBERAPA SESSION\n\n```\nGitHub (lk-ukms-knowledge)\n├── memories/\n│   ├── engram-export.json    ← Semua knowledge tergabung\n│   └── .engram/chunks/\n│       ├── chunk-001.json    ← Dari server A\n│       ├── chunk-002.json    ← Dari server A\n│       ├── chunk-003.json    ← Dari server B (baru!)\n│       ├── chunk-004.json    ← Dari server B (baru!)\n│       └── ...\n└── servers/\n    ├── pjdigital.md          ← Info server A\n    ├── server-b.md           ← Info server B (baru!)\n    └── ...\n```\n\n---\n\n## QUERY DARI PI MANAPUN\n\nSetelah knowledge tergabung di GitHub, Pi di server manapun bisa akses:\n\n```bash\n# Pull knowledge terbaru\ncd ~/lk-ukms-knowledge\ngit pull\n\n# Import ke Engram lokal\nengram sync --import\n\n# Query semua knowledge\nengram search \"inventory project\"\n# → Muncul project dari SEMUA server!\n\nengram search \"preferensi user\"\n# → Muncul preferensi dari SEMUA server!\n```\n\n---\n\n## CONTOH PERTANYAAN YANG BISA DIJAWAB\n\n| Pertanyaan | Jawaban |\n|------------|---------|\n| \"Apa saja project yang ada?\" | 12+ project di 3 server |\n| \"Project mana yang pakai PHP?\" | 5 di server A, 1 di server B |\n| \"Ada WhatsApp gateway?\" | Ya, di server A (wa.dwibudi.my.id) |\n| \"Server mana yang paling banyak project?\" | Server A (8 project) |\n| \"Bagaimana desain landing page yang disukai?\" | Style claw (maroon, gradient, rounded) |\n\n---\n\n## TROUBLESHOOTING\n\n### Engram tidak ditemukan\n```bash\nnpm list -g @earendil-works/engram\n# Jika tidak ada:\nnpm install -g @earendil-works/engram\n```\n\n### Git auth gagal\n```bash\ncd ~/lk-ukms-knowledge\ngit remote -v\n# Pastikan URL benar\ngit credential-cache exit\ngit pull\n```\n\n### Knowledge tidak muncul setelah import\n```bash\n# Cek chunks ada\nls -la /path/to/your-project/.engram/chunks/\n\n# Manual sync\ncd ~/lk-ukms-knowledge\n./scripts/sync-knowledge.sh\n```\n\n### Push conflict\n```bash\ncd ~/lk-ukms-knowledge\ngit pull --rebase\ngit push\n```\n\n---\n\n## CATATAN PENTING\n\n1. **Satu arah dulu**: Setiap server push ke GitHub secara independen\n2. **GitHub = Source of Truth**: Kalau ada conflict, GitHub jadi acuan\n3. **Auto-sync**: Extension otomatis sync saat Pi session berakhir\n4. **Project name**: Bisa beda per server, tidak masalah\n5. **Cron job**: Backup untuk sync periodik (setiap 6 jam)\n\n---\n\n## INVENTARIS SERVER\n\n### Server A: pjdigital.top (Sudah Setup)\n- lk.pjdigital.top - LK UKMs (PHP + MySQL)\n- bot.pjdigital.top - Slack Bot (Node.js + SQLite)\n- wa.dwibudi.my.id - WhatsApp Gateway (Node.js + MariaDB)\n- dwibudi.my.id - Ruang Belajar LMS (PHP + MySQL)\n- dpmp2.dwibudi.my.id - SIMPMU (PHP + MySQL)\n- lelangu.my.id - Crypto Chart (HTML/JS)\n- nanariset.my.id - Nana Research + X Creator (PHP + Next.js)\n- eclipsetrack.my.id - Panduan Jurnal (PHP + Supabase)\n\n### Server B: [TBD] (Belum Setup)\n- [Project list akan ditambah setelah user kasih info]\n\n### Server C: [TBD] (Belum Setup)\n- [Project list akan ditambah setelah user kasih info]\n\n---\n\n*Instruksi ini tersimpan di Engram dan akan otomatis di-sync ke GitHub. Pi di server lain bisa akses dengan: `engram search \"instruksi setup knowledge hub\"`*",
+      "title": "Instruksi setup Pi di server lain - Otak Kedua DBS",
+      "content": "**What**: Panduan canonical untuk menghubungkan Pi di server baru ke Central Knowledge Hub / Otak Kedua DBS.\n\n**Why**: Agar Pi di server manapun bisa push/pull knowledge ke GitHub yang sama dan semua server saling melengkapi.\n\n**Where**: GitHub repo canonical: `https://github.com/iggbudi/dbs-second-brain`; local clone recommended: `~/dbs-second-brain`; Engram chunks live in repo root `.engram/`; curated summaries live in `memories/`; wiki docs live in `wiki/`.\n\n**Learned**: Nama lama `lk-ukms-knowledge` sudah obsolete. Gunakan `dbs-second-brain` di `.engram/config.json` (`github_repo`), cron, scripts, dan instruksi clone. Setup server baru: clone repo, install Engram, copy/import `.engram/chunks` + `.engram/manifest.json` ke project, run `engram sync --import`, setup sync script/cron jika perlu, lalu Pi wajib cek `mem_context`/`mem_search` di awal sesi. Server A pjdigital punya 8 project; Server B aidis.my.id punya 17 project dan sudah di-import ke Engram observation `server-aidis-inventory`.",
       "project": "lk-ukms",
       "scope": "project",
       "topic_key": "knowledge-hub-setup-instructions",
-      "revision_count": 2,
+      "revision_count": 3,
       "duplicate_count": 1,
       "last_seen_at": "2026-06-25 14:42:29",
       "created_at": "2026-06-25 14:42:29",
-      "updated_at": "2026-06-25 14:48:16"
+      "updated_at": "2026-06-25 16:28:28"
     },
     {
       "id": 27,
       "sync_id": "obs-438d32fc171e4822",
       "session_id": "019eff19-63e1-7755-ba88-91b719e86e14",
       "type": "architecture",
-      "title": "Konsep Central Knowledge Hub - Multi Server",
-      "content": "**What**: User ingin membuat Central Knowledge Hub yang menggabungkan knowledge dari semua server ke satu GitHub repo\n\n**Why**: User ingin punya \"second brain\" lengkap yang bisa diakses dari Pi manapun, di server manapun\n\n**Arsitektur**:\n\n```\nServer A (pjdigital)    Server B    Server C    →    GitHub (lk-ukms-knowledge)    →    Akses dari mana saja\n     8 projects          N projects   N projects         Central KB                        \"Apa saja project?\"\n```\n\n**Implementation Plan**:\n\n### 1. Naming Convention untuk Knowledge\n\nSetiap server punya identifier unik:\n- `server:pjdigital` - Server utama (8 project)\n- `server:XXX` - Server lain (project X, Y, Z)\n- `server:YYY` - Server lain lagi\n\n### 2. Metadata di Setiap Observation\n\nTambahkan metadata saat menyimpan:\n```javascript\nmem_save({\n  title: \"...\",\n  content: \"...\",\n  metadata: {\n    server: \"pjdigital\",\n    project: \"lk-ukms\",\n    location: \"/var/www/lk.pjdigital.top\"\n  }\n})\n```\n\n### 3. Struktur Repo GitHub\n\n```\nlk-ukms-knowledge/\n├── README.md                 # Overview semua server \u0026 project\n├── servers/\n│   ├── pjdigital/\n│   │   ├── projects.md       # 8 project di server ini\n│   │   └── notes.md          # Catatan khusus server\n│   ├── server-b/\n│   │   ├── projects.md\n│   │   └── notes.md\n│   └── server-c/\n│       ├── projects.md\n│       └── notes.md\n├── memories/\n│   ├── engram-export.json    # Semua Engram observations\n│   └── .engram/chunks/       # Chunk files\n├── docs/                     # Shared documentation\n├── wiki/                     # Knowledge wiki\n└── scripts/\n    ├── sync-knowledge.sh     # Sync script\n    └── merge-servers.sh      # Merge knowledge dari multi server\n```\n\n### 4. Sync Flow\n\n```\nSetiap server:\n1. Pull knowledge terbaru dari GitHub\n2. Merge dengan local knowledge\n3. Push ke GitHub\n\nGitHub jadi:\n- Central source of truth\n- Version control untuk semua knowledge\n- Backup \u0026 restore capability\n```\n\n### 5. Query Examples\n\nSetelah setup, Pi di server manapun bisa tanya:\n- \"Apa saja project yang ada di semua server?\"\n- \"Project mana yang pakai PHP?\"\n- \"Apa preferensi user untuk desain?\"\n- \"Bagaimana cara setup server baru?\"\n- \"Server mana yang punya WhatsApp gateway?\"\n\n### 6. Benefits\n\n| Benefit | Deskripsi |\n|---------|-----------|\n| **Single Source of Truth** | Semua knowledge di satu tempat |\n| **Cross-Server Access** | Pi di server A bisa tahu project di server B |\n| **Version Control** | History perubahan knowledge |\n| **Backup \u0026 Restore** | Git sebagai backup mechanism |\n| **Collaboration** | Tim bisa contribute ke knowledge base |\n| **Searchable** | Bisa search across semua server |\n\n### 7. Next Steps\n\n1. ✅ Server A (pjdigital) sudah punya Engram + GitHub sync\n2. ⏳ User perlu kasih tahu project di server lain\n3. ⏳ Setup Engram di server lain\n4. ⏳ Test cross-server knowledge access\n5. ⏳ Buat README.md yang list semua server \u0026 project\n\n**Where**:\n- GitHub: https://github.com/iggbudi/lk-ukms-knowledge\n- Server A: /var/www/lk.pjdigital.top (8 project)\n- Server B: TBD (user akan kasih info)\n- Server C: TBD (user akan kasih info)\n\n**Learned**:\n- User punya banyak server dengan banyak project\n- User ingin central knowledge base untuk semua\n- GitHub sebagai single source of truth\n- Pi bisa akses dari mana saja setelah setup",
+      "title": "Konsep Central Knowledge Hub - dbs-second-brain",
+      "content": "**What**: Central Knowledge Hub DBS menggabungkan knowledge dari semua server ke satu GitHub repo.\n\n**Why**: DBS ingin punya second brain lintas Pi/lintas server, sehingga Pi di server mana pun tahu inventory project, preferensi user, keputusan teknis, dan dokumentasi penting.\n\n**Where**: Canonical GitHub repo: `https://github.com/iggbudi/dbs-second-brain`; local clone recommended: `~/dbs-second-brain`.\n\n**Learned**: GitHub berfungsi sebagai source of truth/backup curated, sedangkan Engram adalah memory cepat dan searchable. Struktur ideal: `README.md` overview; `.engram/` chunks + manifest; `memories/` export JSON dan Markdown summaries; `wiki/` dokumentasi detail; `agents/` custom agents; `rules/` conventions; `scripts/` sync utilities. Server A pjdigital.top = 8 project; Server B aidis.my.id = 17 project; Server C TBD. Nama lama `lk-ukms-knowledge` obsolete dan harus dianggap superseded oleh `dbs-second-brain`.",
       "project": "lk-ukms",
       "scope": "project",
       "topic_key": "central-knowledge-hub",
-      "revision_count": 1,
+      "revision_count": 2,
       "duplicate_count": 1,
       "last_seen_at": "2026-06-25 14:46:07",
       "created_at": "2026-06-25 14:46:07",
-      "updated_at": "2026-06-25 14:46:07"
+      "updated_at": "2026-06-25 16:28:35"
     },
     {
       "id": 28,
       "sync_id": "obs-61a631c223f0c569",
       "session_id": "019eff19-63e1-7755-ba88-91b719e86e14",
       "type": "decision",
-      "title": "Perlu README.md di repo lk-ukms-knowledge",
-      "content": "**What**: Perlu buat README.md di repo GitHub lk-ukms-knowledge yang berisi instruksi setup awal\n\n**Why**: Pi di server lain belum tahu nama repo atau apa yang harus dilakukan setelah clone\n\n**Where**: https://github.com/iggbudi/lk-ukms-knowledge\n\n**README.md harus berisi**:\n1. Apa itu repo ini (Central Knowledge Hub)\n2. Cara setup di server baru (7 langkah)\n3. Cara akses knowledge (engram search)\n4. Daftar server yang sudah terhubung\n5. Link ke dokumentasi lengkap\n\n**Next Steps**:\n- User perlu kasih tahu Pi di server lain nama repo: `https://github.com/iggbudi/lk-ukms-knowledge.git`\n- Buat README.md di repo tersebut\n- Pi di server lain: clone → baca README → ikuti instruksi",
+      "title": "README canonical repo dbs-second-brain",
+      "content": "**What**: README setup awal harus mengarah ke repo canonical `dbs-second-brain`, bukan nama lama `lk-ukms-knowledge`.\n\n**Why**: Pi di server lain perlu instruksi yang benar setelah clone dan DBS sudah menetapkan Otak Kedua DBS sebagai repo knowledge hub utama.\n\n**Where**: `https://github.com/iggbudi/dbs-second-brain`, terutama `README.md`.\n\n**Learned**: README harus berisi: apa itu Otak Kedua DBS, aturan nama user DBS, cara setup server baru, cara import Engram chunks dari `.engram/`, cara akses knowledge (`engram search`, `mem_context`), daftar Server A dan Server B, link wiki, troubleshooting, dan checklist setup. Semua referensi lama `lk-ukms-knowledge` dianggap obsolete/superseded.",
       "project": "lk-ukms",
       "scope": "project",
       "topic_key": "github-readme-needed",
-      "revision_count": 1,
+      "revision_count": 2,
       "duplicate_count": 1,
       "last_seen_at": "2026-06-25 14:50:49",
       "review_after": "2026-12-25 14:50:49",
       "created_at": "2026-06-25 14:50:49",
-      "updated_at": "2026-06-25 14:50:49"
+      "updated_at": "2026-06-25 16:28:40"
     },
     {
       "id": 29,
@@ -627,6 +633,54 @@
       "last_seen_at": "2026-06-25 15:36:41",
       "created_at": "2026-06-25 15:36:41",
       "updated_at": "2026-06-25 15:36:41"
+    },
+    {
+      "id": 32,
+      "sync_id": "obs-bcaeedda2b00d204",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "type": "discovery",
+      "title": "Bandingkan Engram dan GitHub Otak Kedua",
+      "content": "**What**: Engram lokal dan repo GitHub dbs-second-brain dibandingkan untuk melihat kelengkapan knowledge.\n**Why**: DBS menegaskan bahwa memori Engram dan GitHub harus saling melengkapi, bukan saling menggantikan.\n**Where**: Engram project lk-ukms/simapro dan GitHub repo https://github.com/iggbudi/dbs-second-brain (`README.md`, `memories/engram-export.json`, `memories/server-aidis-inventory.md`, `wiki/server-aidis-my-id-full-inventory.md`).\n**Learned**: Engram live berisi 31 observations/22 sessions lintas project lk-ukms dan simapro; GitHub export berisi 31 observations/21 sessions dari snapshot 2026-06-25 15:37:51 plus curated docs/wiki Server B. Server B inventory ada di GitHub tetapi belum searchable di Engram lokal current project. README masih punya beberapa referensi lama `lk-ukms-knowledge` meski repo benar adalah `dbs-second-brain`.",
+      "project": "lk-ukms",
+      "scope": "project",
+      "topic_key": "engram-github-complement",
+      "revision_count": 1,
+      "duplicate_count": 1,
+      "last_seen_at": "2026-06-25 16:25:54",
+      "created_at": "2026-06-25 16:25:54",
+      "updated_at": "2026-06-25 16:25:54"
+    },
+    {
+      "id": 33,
+      "sync_id": "obs-7c25a9423e5921ae",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "type": "discovery",
+      "title": "Import Server B aidis.my.id inventory",
+      "content": "**What**: Server B (`aidis.my.id`) inventory from GitHub Otak Kedua DBS imported into Engram.\n**Why**: DBS asked that Engram memory and GitHub knowledge base must complement each other; Server B existed in GitHub README/wiki but was not searchable in local Engram.\n**Where**: Source repo `https://github.com/iggbudi/dbs-second-brain`, files `README.md`, `memories/server-aidis-inventory.md`, `wiki/server-aidis-my-id-full-inventory.md`.\n**Learned**: Server B has 17 active projects: 1) `aidis.my.id` Disposisi Surat UNISBANK, PHP native + PostgreSQL; 2) `al-barokah.my.id` Masjid Al-Barokah, PHP native + DOMPDF; 3) `botjb.nanariset.my.id` static placeholder; 4) `bot.shm.my.id` SIMPEL-U Telegram Bot, Node.js/TypeScript/Telegraf/Pi SDK/MySQL; 5) `brainboard.socai.my.id` Laravel; 6) `cmaestro.my.id` BengkelBot AI chatbot, Node.js/TypeScript/Pi SDK/SQLite; 7) `eduguide.socai.my.id` AI Academic Assistant, Next.js + Laravel + Supabase; 8) `fetal.pjdigital.top` active SSL, details unknown; 9) `inv.nanariset.my.id` invoice system, Node.js; 10) `kl.socai.my.id` Kausar Leather, PHP native + MySQL; 11) `quizify.socai.my.id` Laravel quiz app; 12) `safesphere.my.id` anti-bullying reporting system, Node.js/Express/SQLite; 13) `simpelu.my.id` SIMPEL-U campus management, PHP native + MySQL; 14) `sjmlelang.com` online auction platform, PHP native + MySQL; 15) `socai.my.id` main platform + Telegram bot, Node.js/Express/PostgreSQL; 16) `studdybuddy.socai.my.id` AI Study Buddy, Laravel + MongoDB + Groq; 17) `vibeplan.socai.my.id` AI planning assistant, Laravel + Next.js + MongoDB. Stack grouping in README: PHP Native 5, Laravel 5, Node.js/Express/utility 5, Static/Other 2. Full detail should remain curated in GitHub wiki; Engram should hold searchable summary and pointers.",
+      "project": "lk-ukms",
+      "scope": "project",
+      "topic_key": "server-aidis-inventory",
+      "revision_count": 1,
+      "duplicate_count": 1,
+      "last_seen_at": "2026-06-25 16:27:14",
+      "created_at": "2026-06-25 16:27:14",
+      "updated_at": "2026-06-25 16:27:14"
+    },
+    {
+      "id": 34,
+      "sync_id": "obs-3fe1d9f14aa9385f",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "type": "architecture",
+      "title": "Import aidis.my.id project knowledge",
+      "content": "**What**: Key knowledge for `aidis.my.id` Disposisi Surat UNISBANK imported from GitHub into Engram.\n**Why**: GitHub contained detailed project knowledge that local Engram did not surface; DBS wants Engram and GitHub to complement each other.\n**Where**: Source `dbs-second-brain/memories/aidis-my-id-knowledge.md` and `wiki/aidis-my-id-disposisi-surat.md`.\n**Learned**: `aidis.my.id` is a native PHP 8.2+ PostgreSQL 15+ web app for university incoming-letter disposition. Architecture is 3-layer Controller → Service → Repository; frontend is vanilla HTML/CSS/JS; tests use PHPUnit 10 with SQLite in-memory. Critical constraints: no Laravel/Symfony/frameworks, no React/Vue/Angular, no external deps without approval except PHPMailer, always prepared statements, escape HTML with `htmlspecialchars()`, validate CSRF, and enforce object-level authorization in services. RBAC has 11 roles: Rektor, Sekretaris_Rektor, Wakil_Rektor, Admin_Wakil_Rektor, Admin_Fakultas, Direktur, Dekan, Kepala_Divisi, Kaprodi, Staf, Admin_Tata_Usaha. Service response format: `['success'=\u003ebool,'message'=\u003estring,'data'=\u003earray optional,'errors'=\u003earray optional]`. Known resolved issues include notification URL normalization, login security with CSRF/rate limiting/session cookies, and enum mismatch from missing migration 002. Pending security/quality focus: object-level authorization, file upload access control, notification read authorization, TanggapanService wiring in DisposisiController, UUID generator should use `random_bytes()`. Important files: `public/index.php`, `config/app.php`, `config/database.php`, `docs/README.md`, `docs/TODO.md`. Common commands: `composer install`, `./vendor/bin/phpunit`, `php -S localhost:8080 -t public public/router.php`, database setup via `psql -U postgres -d disposisi_surat -f database/full_dump.sql`.",
+      "project": "lk-ukms",
+      "scope": "project",
+      "topic_key": "aidis-my-id-disposisi",
+      "revision_count": 1,
+      "duplicate_count": 1,
+      "last_seen_at": "2026-06-25 16:27:25",
+      "created_at": "2026-06-25 16:27:25",
+      "updated_at": "2026-06-25 16:27:25"
     }
   ],
   "prompts": [
@@ -1221,6 +1275,62 @@
       "content": "apakah belum di setup?",
       "project": "lk-ukms",
       "created_at": "2026-06-25 15:37:03"
+    },
+    {
+      "id": 75,
+      "sync_id": "prompt-eee447739de4f2a9",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "cek kenapa mcp engram tidak terhubung",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:21:16"
+    },
+    {
+      "id": 76,
+      "sync_id": "prompt-7cfed63d81c188b2",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "buat ringkasan sesi sebelumnya",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:22:09"
+    },
+    {
+      "id": 77,
+      "sync_id": "prompt-f34993d2fb3ae2ff",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "apa saja projectku?",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:23:10"
+    },
+    {
+      "id": 78,
+      "sync_id": "prompt-cc8512c70cc91e59",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "project dari server B apa saja?",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:23:49"
+    },
+    {
+      "id": 79,
+      "sync_id": "prompt-2330f707f31130b9",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "ada di readme repo githun engram",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:24:22"
+    },
+    {
+      "id": 80,
+      "sync_id": "prompt-b4afa0529a3516af",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "bandingkan memori engram dan github, harus saling melengkapi",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:25:17"
+    },
+    {
+      "id": 81,
+      "sync_id": "prompt-9c5125cdfb8178a1",
+      "session_id": "019eff94-d695-78bd-a62d-3059f1372efa",
+      "content": "bereskan gap",
+      "project": "lk-ukms",
+      "created_at": "2026-06-25 16:26:46"
     }
   ]
 }
