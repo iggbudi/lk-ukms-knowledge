@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "exported_at": "2026-06-25 14:00:30",
+  "exported_at": "2026-06-25 14:03:20",
   "sessions": [
     {
       "id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
@@ -353,6 +353,22 @@
       "last_seen_at": "2026-06-25 13:45:50",
       "created_at": "2026-06-25 13:45:50",
       "updated_at": "2026-06-25 13:45:50"
+    },
+    {
+      "id": 19,
+      "sync_id": "obs-d8330108e122f36d",
+      "session_id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
+      "type": "config",
+      "title": "Knowledge Hub Pipeline - Pi + Engram + GitHub Setup",
+      "content": "**What**: Full pipeline Pi → Engram → GitHub knowledge hub implemented and operational.\n\n**Why**: Consolidate all coding agent knowledge (docs, wiki, memories, agents, rules) into one GitHub repo for cross-machine access and version control.\n\n**Where**: \n- GitHub repo: https://github.com/iggbudi/lk-ukms-knowledge.git\n- Local clone: ~/lk-ukms-knowledge/\n- Pi extension: ~/.pi/extensions/knowledge-sync.ts\n- Sync script: ~/lk-ukms-knowledge/scripts/sync-knowledge.sh\n- Engram config: /var/www/lk.pjdigital.top/.engram/config.json (project_name: lk-ukms)\n\n**Pipeline**:\n1. Pi session starts → extension loaded automatically\n2. During session → LLM calls mem_save/mem_update via Engram MCP → saves to SQLite\n3. Session ends (Ctrl+C, /quit, /new) → extension fires session_shutdown hook\n4. Extension runs: engram sync --all → export JSON → copy docs/wiki/agents/rules → git commit → push\n5. On other machine → git pull → engram sync --import → knowledge available\n\n**Repo Structure**:\n- docs/ (15 files): CLAUDE.md, panduanagen.md, arsitektur.md, analisis.md, AGENTS.md, task lists, dll\n- wiki/ (12 files): 00-overview through 99-known-issues\n- agents/ (5 files): lk-analyst, lk-developer, lk-qa, lk-designer, lk-docs\n- rules/ (4 files): agent-routing, development, qa, security\n- memories/: engram-export.json + .engram/chunks/\n- scripts/: sync-knowledge.sh\n\n**Automation**:\n- Pi extension: Auto-sync on session_shutdown, manual via /sync-knowledge command\n- Cron: Every 6 hours (0 */6 * * *)\n- Log: /var/log/knowledge-sync.log\n\n**Git Auth**: HTTPS with cached credentials (server already has access).\n\n**Stats**: 40 files, 8743+ lines, 11 sessions, 18 observations, 27 prompts exported.",
+      "project": "simapro",
+      "scope": "project",
+      "topic_key": "knowledge-hub-pipeline",
+      "revision_count": 1,
+      "duplicate_count": 1,
+      "last_seen_at": "2026-06-25 14:00:46",
+      "created_at": "2026-06-25 14:00:46",
+      "updated_at": "2026-06-25 14:00:46"
     }
   ],
   "prompts": [
@@ -571,6 +587,14 @@
       "content": "https://github.com/iggbudi/lk-ukms-knowledge.git ini reponya",
       "project": "simapro",
       "created_at": "2026-06-25 13:58:09"
+    },
+    {
+      "id": 28,
+      "sync_id": "prompt-db3afeac395e0903",
+      "session_id": "019efeff-88d2-7e06-a802-ff70d3f0b37d",
+      "content": "test pi extension",
+      "project": "simapro",
+      "created_at": "2026-06-25 14:02:46"
     }
   ]
 }
